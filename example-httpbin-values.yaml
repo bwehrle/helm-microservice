@@ -21,7 +21,7 @@ image:
 # command: ["/bin/sh","-c"]
 # args: ["echo 'consuming a message'; sleep 5"]
 
-nameOverride: ""
+nameOverride: "httpbin"
 fullnameOverride: ""
 
 ## Optionally specify an imagePullSecret.
@@ -43,7 +43,7 @@ services:
     annotations: {}
     specs:
     - port: 8000
-      targetPort: 8000
+      targetPort: 80
       name: http
 
 environment: {}
@@ -51,12 +51,15 @@ environment: {}
 
 #Probes
 readiness:
-  enabled: false
+  enabled: true
   path: /status/200
-  port: 8000
+  port: 80
   initialDelaySeconds: 5
   periodSeconds: 5
   failureThreshold: 3
+
+liveness:
+  enabled: false
 
 #ingress:
 #  enabled: false

@@ -1,5 +1,6 @@
 {{- define "ingress" -}}
 {{- $root:= . }}
+{{- if .Values.ingress -}}
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "microservice.fullname" . -}}
 apiVersion: extensions/v1beta1
@@ -36,5 +37,6 @@ spec:
               serviceName: {{ include "microservice.fullname" $root }}-svc-{{ .serviceName }}
               servicePort: {{ .servicePort }}
   {{- end }}
+{{- end -}}
 {{- end -}}
 {{- end -}}

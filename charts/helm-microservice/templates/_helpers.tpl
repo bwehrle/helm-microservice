@@ -33,13 +33,22 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 {{- end -}}
 
+
+{{- define "microservice.servicename" -}}
+  {{- $name := default .Chart.Name .Values.nameOverride -}}
+  {{- if eq .Release.Name "main" -}}
+    {{- printf "%s" $name -}}
+  {{- else -}}
+    {{- printf "%s-%s" $name .Release.Name -}}
+  {{- end -}}
+{{- end -}}
+
 {{/*
 Create chart name and version as used by the chart label.
 */}}
 {{- define "microservice.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
-
 
 
 {{/*
