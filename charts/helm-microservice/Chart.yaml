@@ -6,11 +6,7 @@ appVersion: 0.6.0
 description: A Helm chart which provide a DRY microservice deployment mechanism
 keywords:
   - microservice
-  - template
-  - DRY
-  - generic
 source:
-  - https://github.com/cetic/helm-microservice
+  - https://github.com/bwehrle/helm-microservice
 maintainers:
-  - name: terence-bigtt
-  - name: alexnuttinck
+  - name: bwehrle

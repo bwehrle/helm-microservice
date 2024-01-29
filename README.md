@@ -1,6 +1,5 @@
 # A Helm Chart for DRY microservice deployments
 
-[![CircleCI](https://circleci.com/gh/cetic/helm-microservice.svg?style=svg)](https://circleci.com/gh/cetic/helm-microservice/tree/master) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![version](https://img.shields.io/github/tag/cetic/helm-microservice.svg?label=release)
 
 ## Introduction
 
@@ -28,7 +27,7 @@ The federating chart will provide the configuration for each microservices in it
 ### Add Helm repository
 
 ```bash
-helm repo add cetic https://cetic.github.io/helm-charts
+helm repo add bwehrle-ms https://bwehrle.github.io/helm-microservice/
 helm repo update
 ```
 
@@ -52,7 +51,7 @@ For other configurations, please see the [values.yaml](values.yaml) file. This f
 Install the microservice helm chart with a release name `my-release`:
 
 ```bash
-helm install my-release cetic/microservice
+helm install my-release bwehrle-ms/microservice
 ```
 
 ## Uninstallation
