@@ -6,8 +6,8 @@
 ### Add Helm repository
 
 ```bash
-helm repo add cetic https://bwehrle.github.io/helm-microservice/
-helm repo update
+helm repo add bwehrle-ms https://bwehrle.github.io/helm-microservice/
+helm repo bwehrle-ms
 ```
 
 ### Configure the chart
@@ -30,7 +30,7 @@ For other configurations, please see the [values.yaml](values.yaml) file. This f
 Install the microservice helm chart with a release name `my-release`:
 
 ```bash
-helm install my-release bwehrle/microservice
+helm install my-release bwehrle-ms/microservice
 ```
 
 ## Uninstallation
