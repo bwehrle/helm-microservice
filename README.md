@@ -1,34 +1,12 @@
-# A Helm Chart for DRY microservice deployments
+# Helm Repo
 
-[![CircleCI](https://circleci.com/gh/cetic/helm-microservice.svg?style=svg)](https://circleci.com/gh/cetic/helm-microservice/tree/master) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![version](https://img.shields.io/github/tag/cetic/helm-microservice.svg?label=release)
-
-## Introduction
-
-This helm chart deploys a deployment, with a series of services and ingresses for a given container, hosting a web service with the following properties:
-
-- Configuration from environment variables
-- exposes a number of ports, dependent on the container
-
-The chart exposes port 8000 over http by default, with a load balancing service, but the ports and services are configured from a list of arbitrary length in the values file.
-
-Similarly, the environment variables are injected from a definition list, of arbitrary length.
-
-The goal is to provide a DRY microservice deployment mechanism with some flexibility, to be used with some other charts orchestrating a series of microservices via a requirement file, pointing to this chart, where each instance of this chart is differenciated using aliases.
-
-The federating chart will provide the configuration for each microservices in its values file.
-
-## Prerequisites
-
-- Kubernetes cluster 1.10+
-- Helm 3.0.0+
-- PV provisioner support in the underlying infrastructure.
 
 ## Installation
 
 ### Add Helm repository
 
 ```bash
-helm repo add cetic https://cetic.github.io/helm-charts
+helm repo add cetic https://bwehrle.github.io/helm-microservice/
 helm repo update
 ```
 
@@ -52,7 +30,7 @@ For other configurations, please see the [values.yaml](values.yaml) file. This f
 Install the microservice helm chart with a release name `my-release`:
 
 ```bash
-helm install my-release cetic/microservice
+helm install my-release bwehrle/microservice
 ```
 
 ## Uninstallation
