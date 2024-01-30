@@ -2,6 +2,7 @@
 {{/* todo: remove hard-coded values */}}
 {{/* todo: generate resource for each service defined in the helm values file */}}
 {{- $name := include "microservice.servicename" . -}}
+{{- if contains "main" .Release.Name }}
 apiVersion: ivro.miro/v1alpha1
 kind: VirtualServiceBase
 metadata:
@@ -13,4 +14,5 @@ spec:
   hosts:
   - {{ printf "%s.%s.cluster.local" $name .Release.Namespace | squote }}
   - {{ printf "%s.example.com" $name | squote }}
+  {{- end -}}
 {{- end -}}

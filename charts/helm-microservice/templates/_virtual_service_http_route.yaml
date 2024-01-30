@@ -8,15 +8,19 @@ spec:
     apiVersion: ivro.miro/v1alpha1
     kind: VirtualServiceBase
     name: {{ include "microservice.servicename" . }}
-  {{- if eq .Release.Name "main" }}
+    namespace: {{ .Release.Namespace }}
+  {{- if contains "main" .Release.Name }}
   httpRoute:
     route:
-    - destination:
+    - destination: # service instance 
         host: {{ include "microservice.serviceinstance" . }}
         port:
           number: 8000
-  {{- end }}
-  {{- if ne .Release.Name "main" }}
+      headers:
+        response:
+          add:
+            X-Context-Served: {{ .Release.Name }}
+  {{- else }}
   httpRoute:
     match:
       - headers:

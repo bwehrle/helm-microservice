@@ -36,11 +36,10 @@ If release name contains chart name it will be used as a full name.
 
 {{- define "microservice.serviceinstance" -}}
   {{- $name := default .Chart.Name .Values.nameOverride -}}
-  {{- $}}
-  {{- if eq .Release.Name "main" -}}
+  {{- if contains "main" .Release.Name  -}}
     {{- printf "%s" $name -}}
   {{- else -}}
-    {{- printf "%s-%s" $name .Release.Name -}}
+    {{- printf "%s" .Release.Name -}}
   {{- end -}}
 {{- end -}}
 
