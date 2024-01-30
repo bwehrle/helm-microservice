@@ -2,6 +2,19 @@ apiVersion: v1
 entries:
   microservice:
   - apiVersion: v2
+    appVersion: 0.6.1
+    created: "2024-01-30T10:33:30.503186825Z"
+    description: A Helm chart which provide a DRY microservice deployment mechanism
+    digest: 7e4b04930ea1f3b33ff7d04c940441b540eb28f619016b898dc6b2685ec29b55
+    keywords:
+    - microservice
+    maintainers:
+    - name: bwehrle
+    name: microservice
+    urls:
+    - https://github.com/bwehrle/helm-microservice/releases/download/microservice-0.6.1/microservice-0.6.1.tgz
+    version: 0.6.1
+  - apiVersion: v2
     appVersion: 0.6.0
     created: "2024-01-29T17:33:53.227403798Z"
     description: A Helm chart which provide a DRY microservice deployment mechanism
@@ -18,4 +31,4 @@ entries:
     urls:
     - https://github.com/bwehrle/helm-microservice/releases/download/microservice-0.6.0/microservice-0.6.0.tgz
     version: 0.6.0
-generated: "2024-01-29T17:33:53.227414789Z"
+generated: "2024-01-30T10:33:30.503202765Z"
