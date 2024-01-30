@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "microservice.servicename" . }}
+  name: {{ include "microservice.serviceinstance" . }}
   {{- if .Values.annotations }}
   annotations:
   {{- range $key, $value := .Values.annotations }}

@@ -1,0 +1,16 @@
+{{- define "virtual_service_base" -}}
+{{/* todo: remove hard-coded values */}}
+{{/* todo: generate resource for each service defined in the helm values file */}}
+{{- $name := include "microservice.servicename" . -}}
+apiVersion: ivro.miro/v1alpha1
+kind: VirtualServiceBase
+metadata:
+  name: {{ include "microservice.servicename" . }}
+spec:
+  gateways:
+  - {{ include "microservice.servicename" . }}-gateway
+  - mesh
+  hosts:
+  - {{ printf "%s.%s.cluster.local" $name .Release.Namespace | squote }}
+  - {{ printf "%s.example.com" $name | squote }}
+{{- end -}}

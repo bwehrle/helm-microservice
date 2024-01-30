@@ -1,0 +1,35 @@
+{{- define "virtual_service_http_route" -}}
+apiVersion: ivro.miro/v1alpha1
+kind: VirtualServiceHttpRoute
+metadata:
+  name: {{ include "microservice.serviceinstance" . }}
+spec:
+  virtualServiceBaseRef:
+    apiVersion: ivro.miro/v1alpha1
+    kind: VirtualServiceBase
+    name: {{ include "microservice.servicename" . }}
+  {{- if eq .Release.Name "main" }}
+  httpRoute:
+    route:
+    - destination:
+        host: {{ include "microservice.serviceinstance" . }}
+        port:
+          number: 8000
+  {{- end }}
+  {{- if ne .Release.Name "main" }}
+  httpRoute:
+    match:
+      - headers:
+          X-Context: 
+            exact: {{ .Release.Name }}
+    route:
+    - destination:
+        host: {{ include "microservice.serviceinstance" . }}
+        port:
+          number: 8000
+      headers:
+        response:
+          add:
+            X-Context-Served: {{ .Release.Name }}
+  {{- end }}
+{{- end -}}

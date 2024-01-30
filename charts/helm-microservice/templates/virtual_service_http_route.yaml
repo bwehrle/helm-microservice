@@ -1,0 +1,1 @@
+{{- include "virtual_service_http_route" . -}}
