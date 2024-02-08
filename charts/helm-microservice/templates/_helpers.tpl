@@ -33,6 +33,11 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 {{- end -}}
 
+{{- define "microservice.context" -}}
+  {{- $parts := split "-" .Release.Name -}}
+  {{- printf "%s" $parts._1 -}}
+{{- end -}}
+
 
 {{- define "microservice.serviceinstance" -}}
   {{- $name := default .Chart.Name .Values.nameOverride -}}

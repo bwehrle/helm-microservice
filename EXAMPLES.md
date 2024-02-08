@@ -5,13 +5,15 @@
 
 Deploy new httpbin microservice "staging" release
 ```sh
-helm install httpbin-staging microservice-0.6.0.tgz --values example-httpbin-values.yaml --namespace httpbin-helm
-helm status httpbin-staging --namespace httpbin-helm
+# Build helm chart locally
+helm package charts/helm-microservice
+helm install httpbin-r1 microservice-0.6.3.tgz --values example-httpbin-values.yaml --namespace httpbin
+helm status httpbin-r1 --namespace httpbin
 ```
 
 
 Uninstall httpbin microservice "staging" release
 ```sh
-helm uninstall httpbin-staging --namespace httpbin-helm
-helm status httpbin-staging --namespace httpbin-helm
+helm uninstall httpbin-r1 --namespace httpbin-helm
+helm status httpbin-r1 --namespace httpbin-helm
 ```

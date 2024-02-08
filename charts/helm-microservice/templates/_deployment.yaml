@@ -75,15 +75,15 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{- if .Values.liveness.enabled }}
+          {{- if .Values.liveness.enabled }}
           livenessProbe:
             httpGet:
               path: {{ .Values.liveness.path }}
               port: {{ .Values.liveness.port }}
             initialDelaySeconds: {{ .Values.liveness.initialDelaySeconds }}
             periodSeconds: {{ .Values.liveness.periodSeconds }}
-      {{- end}}
-      {{- if .Values.readiness.enabled }}
+          {{- end}}
+          {{- if .Values.readiness.enabled }}
           readinessProbe:
             httpGet:
               path: {{ .Values.readiness.path }}
@@ -91,5 +91,10 @@ spec:
             initialDelaySeconds: {{ .Values.readiness.initialDelaySeconds }}
             periodSeconds: {{ .Values.readiness.periodSeconds }}
             failureThreshold: {{ .Values.readiness.failureThreshold }}
-      {{- end }}
+          {{- end }}
+        - name: istio-proxy
+          image: auto
+          env:
+          - name: MIRO_CONTEXT_ID
+            value: {{ include "microservice.context" . }}
 {{- end -}}

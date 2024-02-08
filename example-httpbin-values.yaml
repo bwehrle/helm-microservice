@@ -28,8 +28,7 @@ fullnameOverride: ""
 ## Secret must be manually created in the namespace.
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 ##
-
-imagePullSecrets: myRegistrKeySecretName
+#imagePullSecrets: myRegistrKeySecretName
 createServiceAccount: false
 rbac: false
 
