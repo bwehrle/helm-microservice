@@ -12,9 +12,9 @@ global:
 ## ref: https://hub.docker.com/r/apache/nifi/
 ##
 image:
-  repository: "docker.io/kong/httpbin"
+  repository: "bwehrle/forwardbin"
   tag: "latest"
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
   #replicaCount: 1
 
@@ -28,6 +28,7 @@ fullnameOverride: ""
 ## Secret must be manually created in the namespace.
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 ##
+
 #imagePullSecrets: myRegistrKeySecretName
 createServiceAccount: false
 rbac: false

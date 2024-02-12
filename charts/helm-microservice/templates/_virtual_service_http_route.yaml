@@ -16,10 +16,6 @@ spec:
         host: {{ include "microservice.serviceinstance" . }}
         port:
           number: 8000
-      headers:
-        response:
-          add:
-            X-Context-Served: {{ .Release.Name }}
   {{- else }}
   httpRoute:
     match:
@@ -31,9 +27,5 @@ spec:
         host: {{ include "microservice.serviceinstance" . }}
         port:
           number: 8000
-      headers:
-        response:
-          add:
-            X-Context-Served: {{ .Release.Name }}
   {{- end }}
 {{- end -}}
