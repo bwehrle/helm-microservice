@@ -12,7 +12,7 @@ global:
 ## ref: https://hub.docker.com/r/apache/nifi/
 ##
 image:
-  repository: "bwehrle/forwardbin"
+  repository: "kennethreitz/httpbin"
   tag: "latest"
   pullPolicy: Always
 
@@ -75,9 +75,9 @@ liveness:
 
 resources:
   limits:
-    cpu: 2
-    memory: 2000Mi
+    cpu: 500m
+    memory: 800Mi
   requests:
     cpu: 500m
-    memory: 500Mi
+    memory: 600Mi
 

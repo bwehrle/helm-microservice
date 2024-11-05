@@ -1,0 +1,93 @@
+---
+# Source: microservice/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpbin-ivro-poc
+  labels:
+    app.kubernetes.io/name: httpbin-ivro-poc-svc-httpbin
+    helm.sh/chart: microservice-0.6.4
+    app.kubernetes.io/instance: httpbin-ivro-poc
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: httpbin
+    app.kubernetes.io/instance: httpbin-ivro-poc
+  ports:
+    - name: http
+      port: 8000
+      protocol: TCP
+      targetPort: 80
+---
+# Source: microservice/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpbin-ivro-poc
+  labels:
+    app.kubernetes.io/name: httpbin
+    helm.sh/chart: microservice-0.6.4
+    app.kubernetes.io/instance: httpbin-ivro-poc
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: httpbin
+      app.kubernetes.io/instance: httpbin-ivro-poc
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: httpbin
+        app.kubernetes.io/instance: httpbin-ivro-poc
+    spec:
+      containers:
+        - name: microservice
+          image: "bwehrle/forwardbin:latest"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 2
+              memory: 2000Mi
+            requests:
+              cpu: 500m
+              memory: 500Mi
+          readinessProbe:
+            httpGet:
+              path: /status/200
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 3
+        - name: istio-proxy
+          image: auto
+          env:
+          - name: MIRO_CONTEXT_ID
+            value: ivro
+---
+# Source: microservice/templates/virtual_service_http_route.yaml
+apiVersion: ivro.miro/v1alpha1
+kind: VirtualServiceHttpRoute
+metadata:
+  name: httpbin-ivro-poc
+spec:
+  virtualServiceBaseRef:
+    apiVersion: ivro.miro/v1alpha1
+    kind: VirtualServiceBase
+    name: httpbin
+    namespace: infra-configuration-poc
+  httpRoute:
+    match:
+      - headers:
+          X-Context: 
+            exact: httpbin-ivro-poc
+    route:
+    - destination:
+        host: httpbin-ivro-poc
+        port:
+          number: 8000

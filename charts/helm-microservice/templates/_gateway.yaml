@@ -1,5 +1,5 @@
 {{- define "gateway" -}}
-{{- if contains "main" .Release.Name }}
+{{- if contains "gateway" .Release.Name }}
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
